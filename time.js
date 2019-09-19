@@ -1,3 +1,5 @@
+var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
 // A $( document ).ready() block.
 $(document).ready(function() {
   var dNow = new Date();
@@ -89,8 +91,9 @@ function nextWeek() {
 
 function next_month() {
   var CurrentDate = new Date();
-  console.log("Current date:", CurrentDate);
   CurrentDate.setMonth(CurrentDate.getMonth() + 1);
+  CurrentDate.setDate(1);
+
   var localdate =
     CurrentDate.getMonth() +
     1 +
@@ -104,11 +107,32 @@ function next_month() {
     CurrentDate.getMinutes();
   $("#upcoming").text("Next Month");
   $("#currentDate").text(localdate);
+
+  var month = CurrentDate.getMonth();
+  var endDate = months[month];
+  //End date setting
+  CurrentDate.setDate(endDate);
+
+  var localdate =
+    CurrentDate.getMonth() +
+    1 +
+    "/" +
+    CurrentDate.getDate() +
+    "/" +
+    CurrentDate.getFullYear() +
+    " " +
+    CurrentDate.getHours() +
+    ":" +
+    CurrentDate.getMinutes();
+  $("#nextEndDate").text(localdate);
 }
 
 function next_threeMonth() {
   var CurrentDate = new Date();
-  CurrentDate.setMonth(CurrentDate.getMonth() + 3);
+  var currentMonth = CurrentDate.getMonth();
+  CurrentDate.setMonth(currentMonth + 3);
+  CurrentDate.setDate(1);
+
   var localdate =
     CurrentDate.getMonth() +
     1 +
@@ -122,7 +146,24 @@ function next_threeMonth() {
     CurrentDate.getMinutes();
   $("#upcoming").text("Next 3 Months");
   $("#currentDate").text(localdate);
+  //End date setting
+  var month = CurrentDate.getMonth();
+  CurrentDate.setDate(months[month]);
+
+  var localdate =
+    CurrentDate.getMonth() +
+    1 +
+    "/" +
+    CurrentDate.getDate() +
+    "/" +
+    CurrentDate.getFullYear() +
+    " " +
+    CurrentDate.getHours() +
+    ":" +
+    CurrentDate.getMinutes();
+  $("#nextEndDate").text(localdate);
 }
+
 //previous
 var dNow = new Date();
 var localdate =
